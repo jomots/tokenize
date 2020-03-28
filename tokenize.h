@@ -9,9 +9,6 @@ using ConstIterType=typename ContainerType::const_iterator;
 template<typename SrcContType, template <typename ...> class ContainerType=std::vector>
 ContainerType<SrcContType>  tokenize(const SrcContType &source,const SrcContType &separators, bool allowEmpty=false)
 {
-	
-	//static_assert(is_string<SrcContType>(),"not a string");//replace later by
-	
 	ContainerType<SrcContType>  retVal;
 	auto inserter = std::inserter(retVal, retVal.end());// all standard containers but forward_list !!	
 	
