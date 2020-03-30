@@ -17,16 +17,13 @@ ContainerType<SrcContType>  tokenize(const SrcContType &source,const SrcContType
 	auto separatorStart=std::begin(separators);
 	auto separatorEnd=std::end(separators);
 
-	auto getNext=[&](ConstIterType<SrcContType> &prev){return std::find_first_of(prev,end,separatorStart,separatorEnd);};	
-	auto insertIntoContainer=[&](ConstIterType<SrcContType> &prev,ConstIterType<SrcContType> &next){if(allowEmpty||(next>prev && prev<end)) ++(*inserter) = SrcContType(prev,next);};
-
 	ConstIterType<SrcContType> next;
-	auto prev=start;
-	
+	auto prev=start;	
 	do 
 	{
-		next=getNext(prev);	
-		insertIntoContainer(prev,next);			
+		next=std::find_first_of(prev,end,separatorStart,separatorEnd);	
+		if(allowEmpty||(next>prev && prev<end)) 
+			++(*inserter) = SrcContType(prev,next);			
 		prev= next+1;		
 	}while (next!=end);
 	
